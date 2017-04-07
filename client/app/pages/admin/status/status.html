@@ -1,0 +1,47 @@
+<page-header title="管理员">
+</page-header>
+
+<div class="container">
+  <div class="container bg-white p-5">
+    <ul class="tab-nav">
+      <li class="active"><a href="admin/status">系统状态</a></li>
+      <li><a href="admin/queries/tasks">查询队列</a></li>
+      <li><a href="admin/queries/outdated">过期查询</a></li>
+    </ul>
+
+    <div>
+
+      <ul class="list-group col-lg-4">
+        <li class="list-group-item active">常规</li>
+        <li class="list-group-item" ng-repeat="(name, value) in status">
+          <span class="badge">{{value}}</span>
+          {{name | toHuman}}
+        </li>
+      </ul>
+
+      <ul class="list-group col-lg-4">
+        <li class="list-group-item active">管理</li>
+        <li class="list-group-item">
+          <span class="badge" am-time-ago="manager.last_refresh_at*1000.0"></span>
+          上次刷新
+        </li>
+        <li class="list-group-item">
+          <span class="badge" am-time-ago="manager.started_at*1000.0"></span>
+          开始时间
+        </li>
+        <li class="list-group-item">
+          <span class="badge">{{manager.outdated_queries_count}}</span>
+          过期查询数
+        </li>
+      </ul>
+
+      <ul class="list-group col-lg-4">
+        <li class="list-group-item active">队列</li>
+        <li class="list-group-item" ng-repeat="(name, value) in manager.queues">
+          <span class="badge">{{value.size}}</span>
+          {{name}} <span uib-popover="{{value.data_sources}}" popover-trigger="'mouseenter'"><i class="fa fa-question-circle"></i></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

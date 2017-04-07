@@ -1,0 +1,33 @@
+<settings-screen>
+  <email-settings-warning function="'invite emails'"></email-settings-warning>
+  <form class="form" name="$ctrl.userForm" ng-submit="saveUser()" novalidate>
+    <div class="form-group required" ng-class="{ 'has-error':  ($ctrl.userForm.email | showError:$ctrl.userForm )}">
+      <label class="control-label">名称</label>
+      <input type="text" name="name" class="form-control" ng-model="user.name" ng-disabled="user.created" required/>
+
+      <error-messages input="$ctrl.userForm.name" form="$ctrl.userForm"></error-messages>
+    </div>
+
+    <div class="form-group required" ng-class="{ 'has-error': ($ctrl.userForm.email | showError:$ctrl.userForm ) }">
+      <label class="control-label">邮箱</label>
+      <input name="email" type="email" class="form-control" ng-model="user.email" ng-disabled="user.created" required/>
+
+      <error-messages input="$ctrl.userForm.email" form="$ctrl.userForm"></error-messages>
+    </div>
+
+    <div class="form-group" ng-if="!user.created">
+      <button class="btn btn-primary">添加</button>
+    </div>
+
+
+    <div ng-if="user.created" class="alert alert-success">
+      <p>
+        <strong>用户已创建，很快将收到一封邀请邮件。</strong>
+      </p>
+      <p>
+        你也可以使用以下链接自己邀请他们：<br/>
+        {{user.invite_link}}
+      </p>
+    </div>
+  </form>
+</settings-screen>

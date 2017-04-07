@@ -1,0 +1,10 @@
+你好，{{ invited.name }}
+
+{{ inviter.name }} ({{inviter.email}}) 邀请你完善{{org.name}}Redash账号
+
+点击以下链接设置你的账号：
+
+{{ invite_url }}
+
+你的邮箱： {{invited.email}}
+登录地址： {{ url_for('redash.index', org_slug=org.slug, _external=True) }}
