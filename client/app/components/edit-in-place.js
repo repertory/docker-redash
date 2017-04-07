@@ -13,7 +13,7 @@ function EditInPlace() {
     },
     template(tElement, tAttrs) {
       const elType = tAttrs.editor || 'input';
-      const placeholder = tAttrs.placeholder || 'Click to edit';
+      const placeholder = tAttrs.placeholder || '点击修改';
 
       let viewMode = '';
 

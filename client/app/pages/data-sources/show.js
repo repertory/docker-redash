@@ -38,7 +38,7 @@ function DataSourceCtrl($scope, $routeParams, $http, $location, toastr,
 
     DataSource.test({ id: $scope.dataSource.id }, (httpResponse) => {
       if (httpResponse.ok) {
-        toastr.success('Success');
+        toastr.success('测试成功');
       } else {
         toastr.error(httpResponse.message, '连接测试失败:', { timeOut: 10000 });
       }
@@ -51,8 +51,8 @@ function DataSourceCtrl($scope, $routeParams, $http, $location, toastr,
   }
 
   $scope.actions = [
-    { name: 'Delete', class: 'btn-danger', callback: deleteDataSource },
-    { name: 'Test Connection', class: 'btn-default', callback: testConnection, disableWhenDirty: true },
+    { name: '删除', class: 'btn-danger', callback: deleteDataSource },
+    { name: '测试连接', class: 'btn-default', callback: testConnection, disableWhenDirty: true },
   ];
 }
 

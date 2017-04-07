@@ -55,7 +55,12 @@ start() {
     echo 'started' > /app/started
   fi
 
-  exec /app/manage.py runserver --debugger --reload -h 0.0.0.0
+  WORKERS_COUNT=${WORKERS_COUNT:-1}
+  QUEUES=${QUEUES:-celery}
+  echo "Starting scheduler and $WORKERS_COUNT workers for queues: $QUEUES..."
+  nohup /usr/local/bin/celery worker --app=redash.worker --beat -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair > /dev/null 2>&1 &
+
+  server
 }
 
 case "$1" in

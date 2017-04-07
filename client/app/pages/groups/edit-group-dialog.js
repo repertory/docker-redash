@@ -14,10 +14,10 @@ const EditGroupDialogComponent = {
     const newGroup = this.group.id === undefined;
 
     if (newGroup) {
-      this.saveButtonText = 'Create';
+      this.saveButtonText = '添加';
       this.title = '添加群组';
     } else {
-      this.saveButtonText = 'Save';
+      this.saveButtonText = '保存';
       this.title = '编辑群组';
     }
 

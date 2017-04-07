@@ -37,7 +37,7 @@
         <p ng-if="clientConfig.mailSettingsMissing">
           你没有配置邮件服务，请发送以下链接
           给用户 {{user.name}} 来重置密码:<br/>
-          <a ng-href="passwordResetLink">{{passwordResetLink}}</a>
+          <a ng-href="{{passwordResetLink}}">{{passwordResetLink}}</a>
         </p>
       </div>
     </div>
