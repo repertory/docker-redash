@@ -25,7 +25,7 @@ ENV REDASH_MAIL_DEFAULT_SENDER serve-notice@outlook.com
 
 # 服务安装
 RUN apt-get update && \
-    apt-get -y install postgresql redis-server && \
+    apt-get -y install postgresql redis-server language-pack-zh-hant language-pack-zh-hans && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
