@@ -1,4 +1,4 @@
-FROM redash/redash:1.0.1.b2833
+FROM redash/redash:1.0.1.b2843
 MAINTAINER wangdong <mail@wangdong.io>
 
 USER root
@@ -7,15 +7,6 @@ USER root
 ENV REDASH_DATE_FORMAT YYYY-MM-DD
 ENV REDASH_REDIS_URL redis://127.0.0.1:6379/0
 ENV REDASH_DATABASE_URL postgresql://postgres:postgres@127.0.0.1:5432/postgres
-
-# 邮箱配置
-ENV REDASH_MAIL_SERVER smtp-mail.outlook.com
-ENV REDASH_MAIL_PORT 587
-ENV REDASH_MAIL_USE_TLS true
-ENV REDASH_MAIL_USE_SSL false
-ENV REDASH_MAIL_USERNAME serve-notice@outlook.com
-ENV REDASH_MAIL_PASSWORD 112233..
-ENV REDASH_MAIL_DEFAULT_SENDER serve-notice@outlook.com
 
 # 服务安装
 RUN apt-get update && \
@@ -27,6 +18,10 @@ RUN apt-get update && \
 COPY client /app/client
 COPY templates /app/redash/templates
 COPY bin /app/bin
+RUN npm install -g nrm --registry=https://registry.npm.taobao.org && \
+    nrm use taobao && \
+    echo 'sass_binary_site=https://npm.taobao.org/mirrors/node-sass/' >> ~/.npmrc && \
+    npm install && npm run build && rm -rf node_modules
 
 # 配置修改
 RUN sed -i \
