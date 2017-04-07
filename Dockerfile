@@ -25,7 +25,7 @@ ENV REDASH_MAIL_DEFAULT_SENDER serve-notice@outlook.com
 
 # 服务安装
 RUN apt-get update && \
-    apt-get -y install postgresql redis-server language-pack-zh-hant language-pack-zh-hans && \
+    apt-get -y install postgresql redis-server language-pack-zh-hant language-pack-zh-hans vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -37,6 +37,7 @@ RUN apt-get update && \
 
 # 汉化处理
 COPY client /app/client
+COPY redash /app/redash
 COPY templates /app/redash/templates
 COPY bin /app/bin
 RUN npm install && npm run build && rm -rf node_modules && npm cache clean
