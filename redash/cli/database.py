@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask.cli import AppGroup
 from flask_migrate import stamp
 manager = AppGroup(help="Manage the database (create/drop tables).")

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask_login import LoginManager, user_logged_in
 import hashlib
 import hmac

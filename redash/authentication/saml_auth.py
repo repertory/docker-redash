@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import requests
 from flask import redirect, url_for, Blueprint, request

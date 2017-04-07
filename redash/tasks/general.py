@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 from celery.utils.log import get_task_logger
 from flask_mail import Message

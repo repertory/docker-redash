@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 from redash.query_runner import BaseQueryRunner, register
 

@@ -38,7 +38,6 @@ RUN apt-get update && \
 # 汉化处理
 COPY client /app/client
 COPY redash /app/redash
-COPY templates /app/redash/templates
 COPY bin /app/bin
 RUN npm install && npm run build && rm -rf node_modules && npm cache clean
 

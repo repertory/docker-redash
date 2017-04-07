@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 
 from flask_login import login_required

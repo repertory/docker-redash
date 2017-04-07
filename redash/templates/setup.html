@@ -1,6 +1,6 @@
 {% extends "layouts/signed_out.html" %}
 
-{% block title %}Redash Initial Setup{% endblock %}
+{% block title %}Redash初始设置{% endblock %}
 
 {% macro render_field_errors(field) -%}
     {% if field.errors %}
@@ -23,7 +23,7 @@
 
 {% block content %}
     <h2>
-        Welcome to Redash!<br/><small>Before you can use your instance, you need to do a quick setup.</small>
+        欢迎使用Redash!<br/><small>在使用前你需要进行如下设置</small>
     </h2>
 
     {% with messages = get_flashed_messages() %}
@@ -35,7 +35,7 @@
     {% endwith %}
 
     <form role="form" method="post" name="create_account">
-        <h3>Admin User</h3>
+        <h3>管理员</h3>
         {{ render_field(form.name) }}
         {{ render_field(form.email) }}
         {{ render_field(form.password) }}
@@ -43,22 +43,22 @@
         <div class="checkbox">
             <label>
                 {{ form.security_notifications() }}
-                Subscribe to Security Notifications
+                订阅安全通知
             </label>
         </div>
 
         <div class="checkbox">
             <label>
                 {{ form.newsletter() }}
-                Subscribe to newsletter (version updates, no more than once a month)
+                订阅通讯（版本更新，每月不超过一次）
             </label>
         </div>
 
-        <h3>General</h3>
+        <h3>常规</h3>
 
-        {{ render_field(form.org_name, help_block="Used in email notifications and the UI.") }}
+        {{ render_field(form.org_name, help_block="用于邮件通知和系统界面") }}
 
-        <button type="submit" class="btn btn btn-primary">Setup</button>
+        <button type="submit" class="btn btn btn-primary">设置</button>
     </form>
 {% endblock %}
 

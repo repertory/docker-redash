@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 from flask import redirect, url_for, Blueprint, request
 from redash.authentication.google_oauth import create_and_login_user

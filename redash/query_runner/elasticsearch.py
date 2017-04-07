@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import simplejson as json
 import logging
 import sys

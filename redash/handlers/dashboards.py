@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from itertools import chain
 
 from flask import request, url_for

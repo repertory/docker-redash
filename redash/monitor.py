@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from redash import redis_connection, models, __version__, settings
 
 

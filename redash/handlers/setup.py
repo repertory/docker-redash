@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import redirect, request, render_template, url_for, g
 from flask_login import login_user
 from wtforms import Form, PasswordField, StringField, BooleanField, validators
@@ -11,10 +12,10 @@ from redash.authentication.org_resolving import current_org
 
 
 class SetupForm(Form):
-    name = StringField('Name', validators=[validators.InputRequired()])
-    email = EmailField('Email Address', validators=[validators.Email()])
-    password = PasswordField('Password', validators=[validators.Length(6)])
-    org_name = StringField("Organization Name", validators=[validators.InputRequired()])
+    name = StringField(u'姓名', validators=[validators.InputRequired()])
+    email = EmailField(u'邮箱', validators=[validators.Email()])
+    password = PasswordField(u'密码', validators=[validators.Length(6)])
+    org_name = StringField(u"机构名称", validators=[validators.InputRequired()])
     security_notifications = BooleanField()
     newsletter = BooleanField()
 

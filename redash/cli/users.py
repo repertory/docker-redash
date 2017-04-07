@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from sys import exit
 
 from click import BOOL, argument, option, prompt

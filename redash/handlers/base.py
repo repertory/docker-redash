@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import time
 
 from flask import Blueprint, current_app, request

@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<h2>Welcome to Redash!</h2>
+<h2>欢迎使用Redash!</h2>
 <p class="lead">
     {% if google_auth_url %}
-    To create your account, please choose a password or login with your Google account ({{ user.email }}).
+    要创建您的帐户，请设置密码或使用谷歌账号登录({{ user.email }})
     {% else %}
-    To create your account, please choose a password.
+    要创建您的帐户，请设置密码。
     {% endif %}
 </p>
 {% with messages = get_flashed_messages() %}
@@ -23,14 +23,14 @@
 </div>
 <div class="login-or">
     <hr class="hr-or">
-    <span class="span-or">or</span>
+    <span class="span-or">或</span>
 </div>
 {% endif %}
 <form role="form" method="post" name="invite">
     <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">密码</label>
         <input type="password" class="form-control" id="password" name="password">
     </div>
-    <button type="submit" class="btn btn btn-primary">Set Password</button>
+    <button type="submit" class="btn btn btn-primary">设置密码</button>
 </form>
 {% endblock %}

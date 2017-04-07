@@ -1,8 +1,8 @@
 {% extends "layouts/signed_out.html" %}
 
-{% block title %}Password Reset{% endblock %}
+{% block title %}密码重置{% endblock %}
 {% block content %}
-<h2>Password Reset</h2>
+<h2>密码重置</h2>
 <div class="row">
   <div class="col-md-6" style="">
       <hr>
@@ -15,10 +15,10 @@
     {% endwith %}
     <form role="form" method="post" name="invite">
       <div class="form-group">
-        <label for="password">Enter your new password:</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        <label for="password">输入新密码:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
       </div>
-      <button type="submit" class="btn btn btn-primary">Change my password</button>
+      <button type="submit" class="btn btn btn-primary">修改密码</button>
     </form>
   </div>
 </div>

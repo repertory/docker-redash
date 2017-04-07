@@ -1,10 +1,10 @@
-Hi {{ invited.name }},
+你好，{{ invited.name }}
 
-{{ inviter.name }} ({{inviter.email}}) invited you to join the Redash account of {{org.name}}.
+{{ inviter.name }} ({{inviter.email}}) 邀请你完善{{org.name}}Redash账号
 
-Use the following link to setup your account:
+点击以下链接设置你的账号：
 
 {{ invite_url }}
 
-Your sign-in email: {{invited.email}}
-Your Redash account: {{ url_for('redash.index', org_slug=org.slug, _external=True) }}
+你的邮箱： {{invited.email}}
+登录地址： {{ url_for('redash.index', org_slug=org.slug, _external=True) }}

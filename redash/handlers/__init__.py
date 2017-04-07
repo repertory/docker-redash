@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import jsonify
 from flask_login import login_required
 

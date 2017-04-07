@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import parsedatetime
 from time import mktime
 from datetime import datetime

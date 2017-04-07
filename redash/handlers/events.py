@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import request
 
 from redash.handlers.base import BaseResource

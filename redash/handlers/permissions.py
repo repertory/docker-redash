@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collections import defaultdict
 
 from redash.handlers.base import BaseResource, get_object_or_404

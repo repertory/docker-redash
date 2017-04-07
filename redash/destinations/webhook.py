@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import requests
 from requests.auth import HTTPBasicAuth

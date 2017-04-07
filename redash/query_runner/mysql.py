@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 import json
 import logging
@@ -36,38 +37,41 @@ class Mysql(BaseSQLQueryRunner):
             'properties': {
                 'host': {
                     'type': 'string',
-                    'default': '127.0.0.1'
+                    'default': '127.0.0.1',
+                    'title': u'服务器'
                 },
                 'user': {
-                    'type': 'string'
+                    'type': 'string',
+                    'title': u'用户名'
                 },
                 'passwd': {
                     'type': 'string',
-                    'title': 'Password'
+                    'title': u'密码'
                 },
                 'db': {
                     'type': 'string',
-                    'title': 'Database name'
+                    'title': u'数据库'
                 },
                 'port': {
                     'type': 'number',
                     'default': 3306,
+                    'title': u'端口'
                 },
                 'use_ssl': {
                     'type': 'boolean',
-                    'title': 'Use SSL'
+                    'title': u'使用SSL'
                 },
                 'ssl_cacert': {
                     'type': 'string',
-                    'title': 'Path to CA certificate file to verify peer against (SSL)'
+                    'title': u'CA证书文件的路径(SSL)'
                 },
                 'ssl_cert': {
                     'type': 'string',
-                    'title': 'Path to client certificate file (SSL)'
+                    'title': u'客户端证书文件路径(SSL)'
                 },
                 'ssl_key': {
                     'type': 'string',
-                    'title': 'Path to private key file (SSL)'
+                    'title': u'私钥文件路径(SSL)'
                 }
             },
             'required': ['db'],

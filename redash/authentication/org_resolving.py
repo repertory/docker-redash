@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 This module implements different strategies to resolve the current Organization we are using.
 

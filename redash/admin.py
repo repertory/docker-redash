@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 from flask_admin import Admin
 from flask_admin.base import MenuLink

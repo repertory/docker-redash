@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import time
 from flask import request
 from flask_restful import abort
