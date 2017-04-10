@@ -1,4 +1,4 @@
-FROM docker.io/centos:6
+FROM centos:6
 MAINTAINER wangdong <mail@wangdong.io>
 
 # 常规配置
