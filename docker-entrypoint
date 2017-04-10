@@ -6,7 +6,7 @@ worker() {
   QUEUES=${QUEUES:-queries,scheduled_queries,celery}
 
   echo "Starting $WORKERS_COUNT workers for queues: $QUEUES..."
-  exec /usr/local/bin/celery worker --app=redash.worker -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair
+  exec /usr/bin/celery worker --app=redash.worker -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair
 }
 
 scheduler() {
@@ -15,11 +15,11 @@ scheduler() {
 
   echo "Starting scheduler and $WORKERS_COUNT workers for queues: $QUEUES..."
 
-  exec /usr/local/bin/celery worker --app=redash.worker --beat -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair
+  exec /usr/bin/celery worker --app=redash.worker --beat -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair
 }
 
 server() {
-  exec /usr/local/bin/gunicorn -b 0.0.0.0:5000 --name redash -w4 redash.wsgi:app
+  exec /usr/bin/gunicorn -b 0.0.0.0:5000 --name redash -w4 redash.wsgi:app
 }
 
 help() {
@@ -42,7 +42,7 @@ help() {
 }
 
 tests() {
-  export REDASH_DATABASE_URL="postgresql://postgres@postgres/tests"
+  export REDASH_DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:5432/tests"
   exec make test
 }
 
@@ -58,7 +58,7 @@ start() {
   WORKERS_COUNT=${WORKERS_COUNT:-1}
   QUEUES=${QUEUES:-celery}
   echo "Starting scheduler and $WORKERS_COUNT workers for queues: $QUEUES..."
-  nohup /usr/local/bin/celery worker --app=redash.worker --beat -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair > /dev/null 2>&1 &
+  nohup /usr/bin/celery worker --app=redash.worker --beat -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair > /dev/null 2>&1 &
 
   server
 }
