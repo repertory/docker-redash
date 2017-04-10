@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:centos6
 MAINTAINER wangdong <mail@wangdong.io>
 
 # 常规配置
