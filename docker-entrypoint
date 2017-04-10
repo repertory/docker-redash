@@ -37,7 +37,8 @@ help() {
   echo "create_db -- create database tables"
   echo "manage -- CLI to manage redash"
   echo ""
-  echo "start -- run create_db and server"
+  echo "start -- run create_db, scheduler and server"
+  echo "run -- run scheduler and server"
   echo "bash -- run bash"
 }
 
@@ -47,13 +48,25 @@ tests() {
 }
 
 start() {
-  service redis-server start
-  service postgresql start
+  /etc/init.d/redis start
+  /etc/init.d/postgresql start
 
   if [ ! -f "/app/started" ]; then
     /app/manage.py database create_tables
     echo 'started' > /app/started
   fi
+
+  WORKERS_COUNT=${WORKERS_COUNT:-1}
+  QUEUES=${QUEUES:-celery}
+  echo "Starting scheduler and $WORKERS_COUNT workers for queues: $QUEUES..."
+  nohup /usr/bin/celery worker --app=redash.worker --beat -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair > /dev/null 2>&1 &
+
+  server
+}
+
+run() {
+  /etc/init.d/redis start
+  /etc/init.d/postgresql start
 
   WORKERS_COUNT=${WORKERS_COUNT:-1}
   QUEUES=${QUEUES:-celery}
@@ -94,6 +107,9 @@ case "$1" in
     ;;
   start)
     start
+    ;;
+  run)
+    run
     ;;
   bash)
     exec bash
