@@ -22,9 +22,10 @@ ENV REDASH_MAIL_PASSWORD 112233..
 ENV REDASH_MAIL_DEFAULT_SENDER serve-notice@outlook.com
 
 # 运行环境配置
-RUN rpm -Uvh https://centos6.iuscommunity.org/ius-release.rpm && \
-    yum install -y epel-release gcc gcc-c++ git wget postgresql-devel mysql-devel cyrus-sasl-devel freetds-devel \
-    libffi-devel pwgen openssl-devel redis postgresql-server python27-pip python27-devel && \
+RUN yum install -y epel-release gcc gcc-c++ git wget && \
+    rpm -Uvh https://centos6.iuscommunity.org/ius-release.rpm && \
+    yum install -y postgresql-devel mysql-devel cyrus-sasl-devel freetds-devel libffi-devel pwgen openssl-devel \
+    redis postgresql-server python27-pip python27-devel && \
     sed -i -e 's~ident$~trust~g' /var/lib/pgsql/data/pg_hba.conf && \
     service postgresql initdb
     ln -s /usr/bin/python2.7 /usr/local/bin/python && \
