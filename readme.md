@@ -24,6 +24,7 @@ docker run --name redash -p 5000:5000 registry.cn-hangzhou.aliyuncs.com/wangdong
 
 ```
 docker run --name redash -p 5000:5000 \
+-e REDASH_HOST=http://127.0.0.1:5000 \
 -e REDASH_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:5432/postgres \
 -e REDASH_REDIS_URL=redis://127.0.0.1:6379/0 \
 registry.cn-hangzhou.aliyuncs.com/wangdong/redash start
@@ -33,6 +34,7 @@ registry.cn-hangzhou.aliyuncs.com/wangdong/redash start
 
 ```
 docker run --name redash -p 5000:5000 \
+-e REDASH_HOST=http://127.0.0.1:5000 \
 -e REDASH_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:5432/postgres \
 -e REDASH_REDIS_URL=redis://127.0.0.1:6379/0 \
 registry.cn-hangzhou.aliyuncs.com/wangdong/redash run
@@ -42,6 +44,7 @@ registry.cn-hangzhou.aliyuncs.com/wangdong/redash run
 
 ```
 docker run --name redash -p 5000:5000 \
+-e REDASH_HOST=http://127.0.0.1:5000 \
 -e REDASH_MAIL_SERVER=smtp-mail.outlook.com \
 -e REDASH_MAIL_PORT=587 \
 -e REDASH_MAIL_USE_TLS=true \
