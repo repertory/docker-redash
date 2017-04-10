@@ -45,12 +45,14 @@ RUN wget https://nodejs.org/dist/v7.8.0/node-v7.8.0-linux-x64.tar.gz && \
 RUN git clone -b v1.0.1  https://github.com/getredash/redash.git /app
 WORKDIR /app
 
-RUN pip install -r requirements.txt -r requirements_dev.txt -r requirements_all_ds.txt
-
 # 汉化处理
 COPY client /app/client
 COPY redash /app/redash
 COPY docker-entrypoint /app/bin/docker-entrypoint
-RUN make && npm cache clean && rm -rf /tmp/npm*
+
+# 依赖安装
+RUN pip install -r requirements.txt -r requirements_dev.txt -r requirements_all_ds.txt && \
+    make && \
+    npm cache clean && rm -rf /tmp/npm*
 
 ENTRYPOINT ["/app/bin/docker-entrypoint"]
