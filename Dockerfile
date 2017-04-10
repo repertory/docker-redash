@@ -35,9 +35,9 @@ RUN rpm -Uvh https://centos6.iuscommunity.org/ius-release.rpm && \
 RUN wget https://nodejs.org/dist/v7.8.0/node-v7.8.0-linux-x64.tar.gz && \
     tar -zxf node-v7.8.0-linux-x64.tar.gz -C /usr/local/ --strip-components 1 && \
     rm -f node-v7.8.0-linux-x64.tar.gz && \
-    npm install -g nrm --registry=https://registry.npm.taobao.org && \
-    nrm use taobao && \
-    echo 'sass_binary_site=https://npm.taobao.org/mirrors/node-sass/' >> ~/.npmrc && \
+#    npm install -g nrm --registry=https://registry.npm.taobao.org && \
+#    nrm use taobao && \
+#    echo 'sass_binary_site=https://npm.taobao.org/mirrors/node-sass/' >> ~/.npmrc && \
     npm cache clean && rm -rf /tmp/npm*
 
 # 部署软件源码
