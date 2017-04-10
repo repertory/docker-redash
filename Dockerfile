@@ -26,8 +26,8 @@ RUN yum install -y epel-release gcc gcc-c++ git wget && \
     rpm -Uvh https://centos6.iuscommunity.org/ius-release.rpm && \
     yum install -y postgresql-devel mysql-devel cyrus-sasl-devel freetds-devel libffi-devel pwgen openssl-devel \
     redis postgresql-server python27-pip python27-devel && \
+    service postgresql initdb && \
     sed -i -e 's~ident$~trust~g' /var/lib/pgsql/data/pg_hba.conf && \
-    service postgresql initdb
     ln -s /usr/bin/python2.7 /usr/local/bin/python && \
     ln -s /usr/bin/pip2.7 /usr/local/bin/pip && \
     yum clean all && rm -rf /tmp/yum*
