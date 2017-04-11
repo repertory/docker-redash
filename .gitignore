@@ -1,2 +1,5 @@
+.idea
+.c9
+
 node_modules
 *.pyc
