@@ -52,9 +52,9 @@ WORKDIR /app
 # 汉化处理
 COPY client /app/client
 COPY redash /app/redash
-COPY docker-entrypoint /app/bin/docker-entrypoint
 
-# 依赖安装
+# 部署安装
+COPY docker-entrypoint /app/bin/docker-entrypoint
 RUN pip install -r requirements.txt -r requirements_dev.txt -r requirements_all_ds.txt && \
     make && \
     npm cache clean && rm -rf /tmp/npm*

@@ -138,9 +138,9 @@ function DashboardCtrl($rootScope, $routeParams, $location, $timeout, $q, $uibMo
       });
     };
 
-    const title = 'Archive Dashboard';
-    const message = `Are you sure you want to archive the "${this.dashboard.name}" dashboard?`;
-    const confirm = { class: 'btn-warning', title: 'Archive' };
+    const title = '存档仪表盘';
+    const message = `您确定要存档仪表盘"${this.dashboard.name}"吗?`;
+    const confirm = { class: 'btn-warning', title: '存档' };
 
     AlertDialog.open(title, message, confirm).then(archive);
   };
