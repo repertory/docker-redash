@@ -293,7 +293,7 @@ export default function (ngModule) {
 
     VisualizationProvider.registerVisualization({
       type: 'MAP',
-      name: 'Map',
+      name: '地图',
       renderTemplate,
       editorTemplate: editTemplate,
       defaultOptions,

@@ -25,10 +25,11 @@ ENV REDASH_MAIL_DEFAULT_SENDER serve-notice@outlook.com
 # 运行环境配置
 RUN yum install -y epel-release gcc gcc-c++ git wget && \
     rpm -Uvh https://centos6.iuscommunity.org/ius-release.rpm && \
-    yum install -y postgresql-devel mysql-devel cyrus-sasl-devel freetds-devel libffi-devel pwgen openssl-devel \
-    redis32u postgresql-server python27-pip python27-devel && \
-    service postgresql initdb && \
-    sed -i -e 's~ident$~trust~g' /var/lib/pgsql/data/pg_hba.conf && \
+    rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm && \
+    yum install -y postgresql96-devel mysql-devel cyrus-sasl-devel freetds-devel libffi-devel pwgen openssl-devel \
+    redis32u postgresql96-server python27-pip python27-devel && \
+    service postgresql-9.6 initdb && \
+    sed -i -e 's~peer$~trust~g' -e 's~ident$~trust~g' /var/lib/pgsql/9.6/data/pg_hba.conf && \
     ln -s /usr/bin/python2.7 /usr/local/bin/python && \
     ln -s /usr/bin/pip2.7 /usr/local/bin/pip && \
     yum clean all && rm -rf /tmp/yum*

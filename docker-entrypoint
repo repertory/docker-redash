@@ -49,7 +49,7 @@ tests() {
 
 start() {
   /etc/init.d/redis start
-  /etc/init.d/postgresql start
+  /etc/init.d/postgresql-9.6 start
 
   if [ ! -f "/app/started" ]; then
     /app/manage.py database create_tables
@@ -66,7 +66,7 @@ start() {
 
 run() {
   /etc/init.d/redis start
-  /etc/init.d/postgresql start
+  /etc/init.d/postgresql-9.6 start
 
   WORKERS_COUNT=${WORKERS_COUNT:-1}
   QUEUES=${QUEUES:-celery}
@@ -78,7 +78,7 @@ run() {
 
 dev() {
   /etc/init.d/redis start
-  /etc/init.d/postgresql start
+  /etc/init.d/postgresql-9.6 start
 
   if [ ! -f "/app/started" ]; then
     /app/manage.py database create_tables

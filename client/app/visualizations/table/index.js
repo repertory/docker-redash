@@ -81,7 +81,7 @@ export default function (ngModule) {
   ngModule.config((VisualizationProvider) => {
     VisualizationProvider.registerVisualization({
       type: 'TABLE',
-      name: 'Table',
+      name: '表格',
       renderTemplate: '<grid-renderer options="visualization.options" query-result="queryResult"></grid-renderer>',
       skipTypes: true,
     });

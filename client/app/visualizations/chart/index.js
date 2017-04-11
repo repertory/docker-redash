@@ -63,12 +63,12 @@ function ChartEditor(ColorPalette, clientConfig) {
       };
 
       scope.chartTypes = {
-        line: { name: 'Line', icon: 'line-chart' },
-        column: { name: 'Bar', icon: 'bar-chart' },
-        area: { name: 'Area', icon: 'area-chart' },
-        pie: { name: 'Pie', icon: 'pie-chart' },
-        scatter: { name: 'Scatter', icon: 'circle-o' },
-        bubble: { name: 'Bubble', icon: 'circle-o' },
+        line: { name: '线形图', icon: 'line-chart' },
+        column: { name: '条形图', icon: 'bar-chart' },
+        area: { name: '面积图', icon: 'area-chart' },
+        pie: { name: '饼图', icon: 'pie-chart' },
+        scatter: { name: '散点图', icon: 'circle-o' },
+        bubble: { name: '气泡图', icon: 'circle-o' },
       };
 
       if (clientConfig.allowCustomJSVisualizations) {
@@ -273,7 +273,7 @@ export default function (ngModule) {
 
     VisualizationProvider.registerVisualization({
       type: 'CHART',
-      name: 'Chart',
+      name: '图表',
       renderTemplate,
       editorTemplate: editTemplate,
       defaultOptions,

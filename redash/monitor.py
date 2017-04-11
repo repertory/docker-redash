@@ -5,14 +5,14 @@ from redash import redis_connection, models, __version__, settings
 def get_status():
     status = {}
     info = redis_connection.info()
-    status['redis_used_memory'] = info['used_memory_human']
-    status['version'] = __version__
-    status['queries_count'] = models.db.session.query(models.Query).count()
+    status['Redis使用内存'] = info['used_memory_human']
+    status['版本号'] = __version__
+    status['查询数'] = models.db.session.query(models.Query).count()
     if settings.FEATURE_SHOW_QUERY_RESULTS_COUNT:
-        status['query_results_count'] = models.db.session.query(models.QueryResult).count()
-        status['unused_query_results_count'] = models.QueryResult.unused().count()
-    status['dashboards_count'] = models.Dashboard.query.count()
-    status['widgets_count'] = models.Widget.query.count()
+        status['查询结果数'] = models.db.session.query(models.QueryResult).count()
+        status['未使用查询结果数'] = models.QueryResult.unused().count()
+    status['仪表盘数'] = models.Dashboard.query.count()
+    status['控件数'] = models.Widget.query.count()
 
     status['workers'] = []
 

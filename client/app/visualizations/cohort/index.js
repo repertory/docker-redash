@@ -89,7 +89,7 @@ export default function (ngModule) {
 
     VisualizationProvider.registerVisualization({
       type: 'COHORT',
-      name: 'Cohort',
+      name: '队列',
       renderTemplate: '<cohort-renderer options="visualization.options" query-result="queryResult"></cohort-renderer>',
       editorTemplate: editTemplate,
       defaultOptions,

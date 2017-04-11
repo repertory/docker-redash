@@ -101,7 +101,7 @@ export default function (ngModule) {
   ngModule.config((VisualizationProvider) => {
     VisualizationProvider.registerVisualization({
       type: 'WORD_CLOUD',
-      name: 'Word Cloud',
+      name: '字体云',
       renderTemplate: '<word-cloud-renderer options="visualization.options" query-result="queryResult"></word-cloud-renderer>',
       editorTemplate: '<word-cloud-editor></word-cloud-editor>',
     });

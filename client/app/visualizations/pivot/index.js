@@ -60,7 +60,7 @@ export default function (ngModule) {
 
     VisualizationProvider.registerVisualization({
       type: 'PIVOT',
-      name: 'Pivot Table',
+      name: '数据透视表',
       renderTemplate: '<pivot-table-renderer visualization="visualization" query-result="queryResult"></pivot-table-renderer>',
       editorTemplate: editTemplate,
       defaultOptions,
