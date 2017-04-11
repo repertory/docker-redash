@@ -199,8 +199,25 @@ function QueryResultService($resource, $timeout, $q) {
                  filter.current = [filter.current];
                }
 
+               if (memo && !filter.current.length) return true;
+
                return (memo && some(filter.current, (v) => {
                  const value = row[filter.name];
+
+                 // 范围搜索
+                 if (filter.filterType === 'betweenFilter') {
+                   const value2 = moment.isMoment(value) ? value.format() : value;
+                   const between = v.split('==SEPARATOR==');
+                   const left = !between[0] || value2 >= between[0];
+                   const right = !between[1] || value2 <= between[1];
+                   return left && right;
+                 }
+
+                 // 关键字模糊搜索
+                 if (filter.filterType === 'keywordFilter') {
+                   return value.toString().indexOf(v.toString()) > -1;
+                 }
+
                  if (moment.isMoment(value)) {
                    return value.isSame(v);
                  }
@@ -333,7 +350,7 @@ function QueryResultService($resource, $timeout, $q) {
       }
 
       const filters = [];
-      const filterTypes = ['filter', 'multi-filter', 'multiFilter'];
+      const filterTypes = ['filter', 'multi-filter', 'multiFilter', 'keywordFilter', 'betweenFilter'];
 
       this.getColumns().forEach((col) => {
         const name = col.name;
@@ -346,6 +363,7 @@ function QueryResultService($resource, $timeout, $q) {
             column: col,
             values: [],
             multiple: (type === 'multiFilter') || (type === 'multi-filter'),
+            filterType: type,
           };
           filters.push(filter);
         }
@@ -361,6 +379,8 @@ function QueryResultService($resource, $timeout, $q) {
               filter.current = row[filter.name];
             }
           }
+          // 改为默认不进行筛选
+          if (filter.values.length > 1) filter.current = [];
         });
       });
 

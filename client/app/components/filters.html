@@ -1,7 +1,7 @@
 <div class="container bg-white p-5" ng-show="$ctrl.filters | notEmpty">
   <div class="row">
     <div class="col-sm-6 m-t-5" ng-repeat="filter in $ctrl.filters">
-      <ui-select ng-model="filter.current" ng-if="!filter.multiple" on-select="$ctrl.filterChangeListener(filter, $model)" on-remove="$ctrl.filterChangeListener(filter, $model)">
+      <ui-select ng-model="filter.current" ng-if="filter.filterType == 'filter'" on-select="$ctrl.filterChangeListener(filter, $model)" on-remove="$ctrl.filterChangeListener(filter, $model)">
         <ui-select-match placeholder="选择{{filter.friendlyName}}">{{filter.friendlyName}}: {{$select.selected | filterValue:filter}}</ui-select-match>
         <ui-select-choices repeat="value in filter.values | filter: $select.search">
           {{value | filterValue:filter }}
@@ -14,6 +14,18 @@
           {{value | filterValue:filter }}
         </ui-select-choices>
       </ui-select>
+
+      <div class="row" ng-if="filter.filterType == 'betweenFilter'">
+        <div class="col-sm-6">
+          <input type="text" class="form-control" ng-model="filter.tempLeft" ng-change="filter.current = filter.tempLeft + '==SEPARATOR==' + filter.tempRight" value="" placeholder="输入{{filter.friendlyName}}起始值"/>
+        </div>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" ng-model="filter.tempRight" ng-change="filter.current = filter.tempLeft + '==SEPARATOR==' + filter.tempRight" value="" placeholder="输入{{filter.friendlyName}}结束值"/>
+        </div>
+      </div>
+
+      <input type="text" class="form-control" ng-if="filter.filterType == 'keywordFilter'" ng-model="filter.current" placeholder="输入{{filter.friendlyName}}关键字"/>
+
     </div>
   </div>
 </div>

@@ -54,3 +54,18 @@ docker run --name redash -p 5000:5000 \
 -e REDASH_MAIL_DEFAULT_SENDER=yourname@outlook.com \
 registry.cn-hangzhou.aliyuncs.com/wangdong/redash start
 ```
+
+## 字段搜索
+
+|字段|说明|
+|----|----|
+|::filter|单选框筛选|
+|::multiFilter|多选框筛选|
+|::keywordFilter|关键字模糊筛选(独有功能)|
+|::betweenFilter|字段范围筛选(独有功能)|
+
+> 使用方法
+
+```
+SELECT count(1) AS `人数::betweenFilter` FROM users
+```
