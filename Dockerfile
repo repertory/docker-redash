@@ -28,6 +28,7 @@ RUN yum install -y epel-release gcc gcc-c++ git wget && \
     rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm && \
     yum install -y postgresql96-devel mysql-devel cyrus-sasl-devel freetds-devel libffi-devel pwgen openssl-devel \
     redis32u postgresql96-server python27-pip python27-devel && \
+    export PATH=$PATH:/usr/pgsql-9.6/bin && \
     service postgresql-9.6 initdb && \
     sed -i -e 's~peer$~trust~g' -e 's~ident$~trust~g' /var/lib/pgsql/9.6/data/pg_hba.conf && \
     ln -s /usr/bin/python2.7 /usr/local/bin/python && \
