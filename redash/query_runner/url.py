@@ -11,7 +11,7 @@ class Url(BaseQueryRunner):
             'properties': {
                 'url': {
                     'type': 'string',
-                    'title': 'URL base path'
+                    'title': u'URL地址'
                 }
             }
         }

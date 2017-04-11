@@ -53,7 +53,7 @@ class GoogleAnalytics(BaseSQLQueryRunner):
             'properties': {
                 'jsonKeyFile': {
                     "type": "string",
-                    'title': 'JSON Key File'
+                    'title': u'JSON文件'
                 }
             },
             'required': ['jsonKeyFile'],

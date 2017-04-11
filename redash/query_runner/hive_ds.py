@@ -44,16 +44,20 @@ class Hive(BaseSQLQueryRunner):
             "type": "object",
             "properties": {
                 "host": {
-                    "type": "string"
+                    "type": "string",
+                    "title": u"主机"
                 },
                 "port": {
-                    "type": "number"
+                    "type": "number",
+                    "title": u"端口"
                 },
                 "database": {
-                    "type": "string"
+                    "type": "string",
+                    "title": u"数据库"
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "title": u"用户名"
                 }
             },
             "required": ["host"]

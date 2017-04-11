@@ -76,6 +76,23 @@ run() {
   server
 }
 
+dev() {
+  /etc/init.d/redis start
+  /etc/init.d/postgresql start
+
+  if [ ! -f "/app/started" ]; then
+    /app/manage.py database create_tables
+    echo 'started' > /app/started
+  fi
+
+  WORKERS_COUNT=${WORKERS_COUNT:-1}
+  QUEUES=${QUEUES:-celery}
+  echo "Starting scheduler and $WORKERS_COUNT workers for queues: $QUEUES..."
+  nohup /usr/bin/celery worker --app=redash.worker --beat -c$WORKERS_COUNT -Q$QUEUES -linfo --maxtasksperchild=10 -Ofair > /dev/null 2>&1 &
+
+  exec /app/manage.py runserver --debugger --reload -h 0.0.0.0
+}
+
 case "$1" in
   worker)
     shift
@@ -110,6 +127,9 @@ case "$1" in
     ;;
   run)
     run
+    ;;
+  dev)
+    dev
     ;;
   bash)
     exec bash

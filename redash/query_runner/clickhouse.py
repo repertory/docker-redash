@@ -18,18 +18,21 @@ class ClickHouse(BaseSQLQueryRunner):
             "properties": {
                 "url": {
                     "type": "string",
-                    "default": "http://127.0.0.1:8123"
+                    "default": "http://127.0.0.1:8123",
+                    "title": u"URL地址"
                 },
                 "user": {
                     "type": "string",
-                    "default": "default"
+                    "default": "default",
+                    "title": u"用户名"
                 },
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "title": u"密码"
                 },
                 "dbname": {
                     "type": "string",
-                    "title": "Database Name"
+                    "title": u"数据库"
                 }
             },
             "required": ["dbname"],

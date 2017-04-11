@@ -54,22 +54,26 @@ class PostgreSQL(BaseSQLQueryRunner):
             "type": "object",
             "properties": {
                 "user": {
-                    "type": "string"
+                    "type": "string",
+                    "title": u"用户名"
                 },
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "title": u"密码"
                 },
                 "host": {
                     "type": "string",
-                    "default": "127.0.0.1"
+                    "default": "127.0.0.1",
+                    "title": u"主机"
                 },
                 "port": {
                     "type": "number",
-                    "default": 5432
+                    "default": 5432,
+                    "title": u"端口"
                 },
                 "dbname": {
                     "type": "string",
-                    "title": "Database Name"
+                    "title": u"数据库"
                 }
             },
             "required": ["dbname"],

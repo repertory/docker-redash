@@ -32,17 +32,20 @@ class Graphite(BaseQueryRunner):
             'type': 'object',
             'properties': {
                 'url': {
-                    'type': 'string'
+                    'type': 'string',
+                    "title": u"URL地址"
                 },
                 'username': {
-                    'type': 'string'
+                    'type': 'string',
+                    "title": u"用户名"
                 },
                 'password': {
-                    'type': 'string'
+                    'type': 'string',
+                    "title": u"密码"
                 },
                 'verify': {
                     'type': 'boolean',
-                    'title': 'Verify SSL certificate'
+                    'title': u'验证SSL证书'
                 }
             },
             'required': ['url'],

@@ -16,7 +16,7 @@ npm run watch
 # 本地文件调试
 
 ```
-sudo docker run --rm -p 5000:5000 -v ~/www/docker-redash/redash:/app/redash -v ~/www/docker-redash/client:/app/client registry.cn-hangzhou.aliyuncs.com/wangdong/redash start
+sudo docker run --rm -p 5000:5000 -v ~/www/docker-redash/redash:/app/redash -v ~/www/docker-redash/client:/app/client registry.cn-hangzhou.aliyuncs.com/wangdong/redash dev
 ```
 
 # 浏览器访问

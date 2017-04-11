@@ -41,32 +41,36 @@ class SqlServer(BaseSQLQueryRunner):
             "type": "object",
             "properties": {
                 "user": {
-                    "type": "string"
+                    "type": "string",
+                    "title": u"用户名"
                 },
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "title": u"密码"
                 },
                 "server": {
                     "type": "string",
-                    "default": "127.0.0.1"
+                    "default": "127.0.0.1",
+                    "title": u"服务器"
                 },
                 "port": {
                     "type": "number",
-                    "default": 1433
+                    "default": 1433,
+                    "title": u"端口"
                 },
                 "tds_version": {
                     "type": "string",
                     "default": "7.0",
-                    "title": "TDS Version"
+                    "title": u"TDS版本"
                 },
                 "charset": {
                     "type": "string",
                     "default": "UTF-8",
-                    "title": "Character Set"
+                    "title": u"字符集"
                 },
                 "db": {
                     "type": "string",
-                    "title": "Database Name"
+                    "title": u"数据库"
                 }
             },
             "required": ["db"],

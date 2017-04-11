@@ -54,15 +54,15 @@ class BaseElasticSearch(BaseQueryRunner):
             'properties': {
                 'server': {
                     'type': 'string',
-                    'title': 'Base URL'
+                    'title': u'URL'
                 },
                 'basic_auth_user': {
                     'type': 'string',
-                    'title': 'Basic Auth User'
+                    'title': u'用户名'
                 },
                 'basic_auth_password': {
                     'type': 'string',
-                    'title': 'Basic Auth Password'
+                    'title': u'密码'
                 }
             },
             "secret": ["basic_auth_password"],

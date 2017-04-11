@@ -93,30 +93,31 @@ class AxibaseTSD(BaseQueryRunner):
             'properties': {
                 'protocol': {
                     'type': 'string',
-                    'title': 'Protocol',
+                    'title': u'协议',
                     'default': 'http'
                 },
                 'hostname': {
                     'type': 'string',
-                    'title': 'Host',
+                    'title': u'主机',
                     'default': 'axibase_tsd_hostname'
                 },
                 'port': {
                     'type': 'number',
-                    'title': 'Port',
+                    'title': u'端口',
                     'default': 8088
                 },
                 'username': {
-                    'type': 'string'
+                    'type': 'string',
+                    'title': u'用户名'
                 },
                 'password': {
                     'type': 'string',
-                    'title': 'Password'
+                    'title': u'密码'
                 },
                 'timeout': {
                     'type': 'number',
                     'default': 600,
-                    'title': 'Connection Timeout'
+                    'title': u'超时时间'
                 },
                 'min_insert_date': {
                     'type': 'string',
@@ -133,7 +134,7 @@ class AxibaseTSD(BaseQueryRunner):
                 },
                 'trust_certificate': {
                     'type': 'boolean',
-                    'title': 'Trust SSL Certificate'
+                    'title': u'信任的SSL证书'
                 }
             },
             'required': ['username', 'password', 'hostname', 'protocol', 'port'],

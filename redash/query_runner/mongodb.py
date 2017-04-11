@@ -72,11 +72,11 @@ class MongoDB(BaseQueryRunner):
             'properties': {
                 'connectionString': {
                     'type': 'string',
-                    'title': 'Connection String'
+                    'title': u'连接字符'
                 },
                 'dbName': {
                     'type': 'string',
-                    'title': "Database Name"
+                    'title': u"数据库"
                 },
                 'replicaSetName': {
                     'type': 'string',
