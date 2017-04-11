@@ -93,7 +93,7 @@ function QuerySourceCtrl(Events, toastr, $controller, $scope, $location, $http, 
         }
         $scope.query.visualizations = $scope.query.visualizations.filter(v => vis.id !== v.id);
       }, () => {
-        toastr.error("删除失败。也许是用在仪表盘上？");
+        toastr.error('删除失败。也许是用在仪表盘上？');
       });
     });
   };
