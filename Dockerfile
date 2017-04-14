@@ -64,4 +64,5 @@ RUN pip install -r requirements.txt -r requirements_dev.txt -r requirements_all_
     make && \
     npm cache clean && rm -rf /tmp/npm*
 
+EXPOSE 5000
 ENTRYPOINT ["/app/bin/docker-entrypoint"]
