@@ -1,68 +1,54 @@
-FROM centos:6
+FROM alpine:3.6
 MAINTAINER wangdong <mail@wangdong.io>
 
-ENV PATH $PATH:/usr/pgsql-9.6/bin
+ENV C_FORCE_ROOT true
 
-# 常规配置
-ENV REDASH_HOST http://127.0.0.1:5000
 ENV REDASH_DATE_FORMAT YYYY-MM-DD
-ENV REDASH_COOKIE_SECRET 903463972b275f53104788f0f31f851f7ac8a928
-ENV REDASH_REDIS_URL redis://127.0.0.1:6379/0
-ENV REDASH_DATABASE_URL postgresql://postgres:postgres@127.0.0.1:5432/postgres
-ENV REDASH_ALLOW_SCRIPTS_IN_USER_INPUT true
 ENV REDASH_FEATURE_ALLOW_ALL_TO_EDIT false
 ENV REDASH_FEATURE_SHOW_PERMISSIONS_CONTROL true
 ENV REDASH_FEATURE_ALLOW_CUSTOM_JS_VISUALIZATIONS true
 ENV REDASH_VERSION_CHECK false
-ENV REDASH_LOG_LEVEL INFO
-ENV QUEUES queries,scheduled_queries,celery
-ENV WORKERS_COUNT 2
-ENV PYTHONUNBUFFERED 0
-ENV C_FORCE_ROOT true
 
-# 邮箱配置
 ENV REDASH_MAIL_SERVER smtp-mail.outlook.com
 ENV REDASH_MAIL_PORT 587
 ENV REDASH_MAIL_USE_TLS true
 ENV REDASH_MAIL_USE_SSL false
 ENV REDASH_MAIL_USERNAME serve-notice@outlook.com
-ENV REDASH_MAIL_PASSWORD 112233..
+ENV REDASH_MAIL_PASSWORD 12345678
 ENV REDASH_MAIL_DEFAULT_SENDER serve-notice@outlook.com
 
-# 运行环境配置
-RUN yum install -y epel-release gcc gcc-c++ git wget && \
-    rpm -Uvh https://centos6.iuscommunity.org/ius-release.rpm && \
-    rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm && \
-    yum install -y postgresql96-devel mysql-devel cyrus-sasl-devel freetds-devel libffi-devel pwgen openssl-devel \
-    redis32u postgresql96-server python27-pip python27-devel && \
-    service postgresql-9.6 initdb && \
-    sed -i -e 's~peer$~trust~g' -e 's~ident$~trust~g' /var/lib/pgsql/9.6/data/pg_hba.conf && \
-    ln -s /usr/bin/python2.7 /usr/local/bin/python && \
-    ln -s /usr/bin/pip2.7 /usr/local/bin/pip && \
-    yum clean all && rm -rf /tmp/yum*
+RUN sed -i -e 's~dl-cdn.alpinelinux.org~mirrors.aliyun.com~g' /etc/apk/repositories
+RUN apk --no-cache add bash build-base g++ make autoconf python-dev py2-pip tzdata nodejs nodejs-npm git pwgen \
+    mariadb-dev postgresql-dev libffi-dev linux-headers musl-dev libressl-dev cyrus-sasl-dev libpq && \
+    yes | cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-# 安装node.js
-RUN wget https://nodejs.org/dist/v7.8.0/node-v7.8.0-linux-x64.tar.gz && \
-    tar -zxf node-v7.8.0-linux-x64.tar.gz -C /usr/local/ --strip-components 1 && \
-    rm -f node-v7.8.0-linux-x64.tar.gz && \
-#    npm install -g nrm --registry=https://registry.npm.taobao.org && \
-#    nrm use taobao && \
-#    echo 'sass_binary_site=https://npm.taobao.org/mirrors/node-sass/' >> ~/.npmrc && \
-    npm cache clean && rm -rf /tmp/npm*
+ADD freetds-0.95.95.tar.gz /opt/
+ADD redash-3.0.0.tar.gz /
 
-# 部署软件源码
-RUN git clone -b v1.0.1  https://github.com/getredash/redash.git /app
+RUN mv /redash-3.0.0 /app && \
+    cd /opt/freetds-0.95.95 && \
+    ./configure && make && make install && \
+    rm -rf /opt/freetds-0.95.95
+
 WORKDIR /app
 
 # 汉化处理
-COPY client /app/client
-COPY redash /app/redash
+COPY data/redash/client/app /app/client/app
+COPY data/redash/redash /app/redash
+COPY data/redash/package.json /app/package.json
 
-# 部署安装
-COPY docker-entrypoint /app/bin/docker-entrypoint
-RUN pip install -r requirements.txt -r requirements_dev.txt -r requirements_all_ds.txt && \
+RUN pip --no-cache-dir install \
+    -i https://pypi.tuna.tsinghua.edu.cn/simple \
+    -r requirements.txt -r requirements_dev.txt -r requirements_all_ds.txt
+
+RUN node -v && npm -v && \
+    npm config set registry https://registry.npm.taobao.org && \
+    echo 'sass_binary_site=https://npm.taobao.org/mirrors/node-sass' >> ~/.npmrc && \
     make && \
-    npm cache clean && rm -rf /tmp/npm*
+    cp -r ./client/app/assets/fonts/roboto ./client/dist/fonts/ && \
+    rm -rf node_modules && npm cache clear
 
-EXPOSE 5000
+RUN ln -s /usr/bin/celery /usr/local/bin/celery && \
+    ln -s /usr/bin/gunicorn /usr/local/bin/gunicorn
+
 ENTRYPOINT ["/app/bin/docker-entrypoint"]

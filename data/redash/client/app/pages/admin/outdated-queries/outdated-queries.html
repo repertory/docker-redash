@@ -1,0 +1,46 @@
+<page-header title="管理">
+</page-header>
+
+<div class="container">
+  <div class="container bg-white p-5">
+    <ul class="tab-nav">
+      <li><a href="admin/status">系统状态</a></li>
+      <li><a href="admin/queries/tasks">查询队列</a></li>
+      <li class="active"><a href="admin/queries/outdated">过时的查询</a></li>
+    </ul>
+
+    <table class="table table-condensed table-hover">
+      <thead>
+      <tr>
+        <th>名称</th>
+        <th>创建人</th>
+        <th>运行时间</th>
+        <th>上次执行时间</th>
+        <th>创建时间</th>
+        <th>更新计划</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="row in $ctrl.queries.getPageRows()">
+        <td>
+          {{row.data_source_id}}
+        </td>
+        <td>
+          <a ng-href="queries/{{row.id}}">{{row.name}}</a>
+        </td>
+        <td>{{row.user.name}}</td>
+        <td>{{row.runtime | durationHumanize}}</td>
+        <td>{{row.retrieved_at | dateTime}}</td>
+        <td>{{row.created_at | dateTime }}</td>
+        <td>{{row.schedule | scheduleHumanize}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <paginator paginator="$ctrl.queries"></paginator>
+
+    <div class="badge">
+      上次更新: <span am-time-ago="updatedAt"></span>
+    </div>
+    (<label><input type="checkbox" ng-model="autoUpdate"> 自动更新</label>)
+  </div>
+</div>

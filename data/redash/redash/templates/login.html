@@ -1,0 +1,79 @@
+{% extends "layouts/signed_out.html" %}
+{% block title %}登录 | Redash{% endblock %}
+{% block content %}
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-danger" role="alert">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  {% if show_google_openid %}
+  <div class="row">
+    <a href="{{ google_auth_url }}"><img src="/images/google_login.png" class="login-button"/></a>
+  </div>
+
+  <div class="login-or">
+    <hr class="hr-or">
+    <span class="span-or">or</span>
+  </div>
+  {% endif %}
+
+  {% if show_saml_login %}
+  <div class="row">
+    <a href="/saml/login">SAML登录</a>
+  </div>
+
+  <div class="login-or">
+    <hr class="hr-or">
+    <span class="span-or">or</span>
+  </div>
+  {% endif %}
+
+  {% if show_remote_user_login %}
+  <div class="row">
+    <a href="/remote_user/login">远程用户登录</a>
+  </div>
+
+  <div class="login-or">
+    <hr class="hr-or">
+    <span class="span-or">or</span>
+  </div>
+  {% endif %}
+
+  {% if show_ldap_login %}
+  <div class="row">
+    <a href="/ldap_auth/login">LDAP/SSO登录</a>
+  </div>
+
+  <div class="login-or">
+    <hr class="hr-or">
+    <span class="span-or">or</span>
+  </div>
+  {% endif %}
+
+  <form role="form" method="post" name="login">
+    <div class="form-group">
+      <label for="inputEmail">{{ username_prompt or '邮箱' }}</label>
+      <input type="text" class="form-control" id="inputEmail" name="email" value="{{email}}">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword">密码</label>
+      <input type="password" class="form-control" id="inputPassword" name="password">
+    </div>
+    <div class="checkbox pull-right">
+      <label>
+        <input type="checkbox" name="remember">
+        记住我 </label>
+    </div>
+
+    <button type="submit" class="btn btn btn-primary">
+      登录
+    </button>
+  </form>
+
+  {% if not hide_forgot_password %}
+    <hr>
+    <a href="{{ url_for("redash.forgot_password", org_slug=org_slug) }}">忘记密码</a>
+  {% endif %}
+{% endblock %}
