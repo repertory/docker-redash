@@ -1,0 +1,21 @@
+{% extends "layouts/signed_out.html" %}
+{% block title %}重置密码{% endblock %}
+{% block content %}
+{% if submitted %}
+<h2>重置密码</h2>
+<hr>
+<p class="lead">
+  如果我们发现与该电子邮件地址相关联的帐户, 您将在您的收件箱中找到我们的电子邮件。
+</p>
+{% else %}
+<h2>重置密码</h2>
+<hr>
+<form role="form" method="post">
+    <div class="form-group ">
+        <label for="email">输入用于此帐户的邮箱:</label>
+        <input type="email" class="form-control" name="email" value="{{email}}">
+    </div>
+    <button type="submit" class="btn btn-primary">重置密码</button>
+</form>
+{% endif %}
+{% endblock %}

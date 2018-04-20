@@ -1,5 +1,21 @@
-.idea
-.c9
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-node_modules
-*.pyc
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# other
+data/redash/redash/**/*.pyc
+data/redash/client/dist
+data/redash/node_modules
+data/redash/package-lock.json

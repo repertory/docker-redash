@@ -1,0 +1,64 @@
+{% extends "layouts/signed_out.html" %}
+
+{% block title %}Redash初始化设置{% endblock %}
+
+{% macro render_field_errors(field) -%}
+    {% if field.errors %}
+        {% for e in field.errors %}
+            <p class="help-block">{{ e }}</p>
+        {% endfor %}
+    {% endif %}
+{%- endmacro %}
+
+{% macro render_field(field, help_block=None) -%}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+        {{ field.label() }}
+        {{ field(class='form-control') }}
+        {% if help_block %}
+            <p class="help-block">{{ help_block }}</p>
+        {% endif %}
+        {{ render_field_errors(field) }}
+    </div>
+{%- endmacro %}
+
+{% block content %}
+    <h2>
+        欢迎使用Redash！<br/><small>在使用实例之前，您需要进行快速设置。</small>
+    </h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form role="form" method="post" name="create_account">
+        <h3>管理员</h3>
+        {{ render_field(form.name) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.password) }}
+
+        <div class="checkbox">
+            <label>
+                {{ form.security_notifications() }}
+                订阅安全通知
+            </label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                {{ form.newsletter() }}
+                订阅新闻稿 (版本更新, 不超过每月一次)
+            </label>
+        </div>
+
+        <h3>常规</h3>
+
+        {{ render_field(form.org_name, help_block="用于电子邮件通知和用户界面。") }}
+
+        <button type="submit" class="btn btn btn-primary">设置</button>
+    </form>
+{% endblock %}
+

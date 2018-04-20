@@ -1,0 +1,36 @@
+{% extends "layouts/signed_out.html" %}
+
+{% block content %}
+
+<h2>欢迎使用Redash！</h2>
+<p class="lead">
+    {% if google_auth_url %}
+    要创建您的帐户, 请选择密码或登录您的 Google 帐户 ({{ user.email }})。
+    {% else %}
+    要创建您的帐户, 请选择密码。
+    {% endif %}
+</p>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-danger" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% if google_auth_url %}
+<div class="row">
+    <a href="{{ google_auth_url }}"><img src="/images/google_login.png" class="login-button"/></a>
+</div>
+<div class="login-or">
+    <hr class="hr-or">
+    <span class="span-or">or</span>
+</div>
+{% endif %}
+<form role="form" method="post" name="invite">
+    <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" class="form-control" id="password" name="password">
+    </div>
+    <button type="submit" class="btn btn btn-primary">设置密码</button>
+</form>
+{% endblock %}

@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="$ctrl.dismiss()" ng-disabled="$ctrl.saveInProgress" aria-hidden="true">&times;</button>
+  <h4 class="modal-title">编辑：{{$ctrl.dashboard.name}}</h4>
+</div>
+<div class="modal-body">
+  <p>
+    <input type="text" class="form-control" placeholder="仪表盘名称" ng-model="$ctrl.dashboard.name" autofocus>
+  </p>
+
+  <p ng-if="$ctrl.dashboard.id">
+    <label>
+        <input name="input" type="checkbox" ng-model="$ctrl.dashboard.dashboard_filters_enabled">
+        使用仪表盘筛选器
+    </label>
+  </p>
+
+  <div gridster="$ctrl.gridsterOptions" ng-if="$ctrl.items | notEmpty">
+    <ul>
+      <li gridster-item="item" ng-repeat="item in $ctrl.items" class="widget panel panel-default gs-w">
+        <div class="heading">{{item.name}}</div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-disabled="$ctrl.saveInProgress" ng-click="$ctrl.dismiss()">关闭</button>
+  <button type="button" class="btn btn-primary" ng-disabled="$ctrl.saveInProgress || !$ctrl.isFormValid()" ng-click="$ctrl.saveDashboard()">保存</button>
+</div>
