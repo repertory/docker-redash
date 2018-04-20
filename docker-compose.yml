@@ -17,9 +17,6 @@ services:
       REDASH_DATABASE_URL: postgresql://postgres@postgres/postgres
       REDASH_COOKIE_SECRET: veryverysecret
       REDASH_WEB_WORKERS: 4
-    volumes:
-      - ./data/redash/redash:/app/redash
-#      - ./data/redash/client/dist:/app/client/dist
   worker:
     build: .
     restart: always
