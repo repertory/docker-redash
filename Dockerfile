@@ -36,6 +36,7 @@ WORKDIR /app
 COPY data/redash/client/app /app/client/app
 COPY data/redash/redash /app/redash
 COPY data/redash/package.json /app/package.json
+COPY data/redash/package-lock.json /app/package-lock.json
 
 RUN pip --no-cache-dir install \
     -i https://pypi.tuna.tsinghua.edu.cn/simple \
