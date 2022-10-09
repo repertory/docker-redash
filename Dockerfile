@@ -1,5 +1,4 @@
 FROM alpine:3.6
-MAINTAINER wangdong <mail@wangdong.io>
 
 ENV C_FORCE_ROOT true
 
@@ -14,7 +13,7 @@ ENV REDASH_MAIL_PORT 587
 ENV REDASH_MAIL_USE_TLS true
 ENV REDASH_MAIL_USE_SSL false
 ENV REDASH_MAIL_USERNAME serve-notice@outlook.com
-ENV REDASH_MAIL_PASSWORD 12345678
+ENV REDASH_MAIL_PASSWORD notice12345678
 ENV REDASH_MAIL_DEFAULT_SENDER serve-notice@outlook.com
 
 RUN sed -i -e 's~dl-cdn.alpinelinux.org~mirrors.aliyun.com~g' /etc/apk/repositories
@@ -38,14 +37,17 @@ COPY data/redash/redash /app/redash
 COPY data/redash/package.json /app/package.json
 COPY data/redash/package-lock.json /app/package-lock.json
 
+RUN pip install --upgrade pip
+RUN pip --no-cache-dir install setuptools-git==1.2 rsa==3.4.2 Cython==0.25.2 \
+    -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
 RUN pip --no-cache-dir install \
-    -i https://pypi.tuna.tsinghua.edu.cn/simple \
+    -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com \
     -r requirements.txt -r requirements_dev.txt -r requirements_all_ds.txt
 
-RUN node -v && npm -v && \
-    npm config set registry https://repo.huaweicloud.com/repository/npm/ && \
-    echo 'sass_binary_site=https://repo.huaweicloud.com/node-sass' >> ~/.npmrc && \
-    make && \
+RUN npm config set registry https://repo.huaweicloud.com/repository/npm/
+RUN npm config set sass_binary_site https://repo.huaweicloud.com/node-sass
+
+RUN make && \
     cp -r ./client/app/assets/fonts/roboto ./client/dist/fonts/ && \
     rm -rf node_modules && npm cache clear
 
