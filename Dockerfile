@@ -43,8 +43,8 @@ RUN pip --no-cache-dir install \
     -r requirements.txt -r requirements_dev.txt -r requirements_all_ds.txt
 
 RUN node -v && npm -v && \
-    npm config set registry https://registry.npm.taobao.org && \
-    echo 'sass_binary_site=https://npm.taobao.org/mirrors/node-sass' >> ~/.npmrc && \
+    npm config set registry https://repo.huaweicloud.com/repository/npm/ && \
+    echo 'sass_binary_site=https://repo.huaweicloud.com/node-sass' >> ~/.npmrc && \
     make && \
     cp -r ./client/app/assets/fonts/roboto ./client/dist/fonts/ && \
     rm -rf node_modules && npm cache clear
