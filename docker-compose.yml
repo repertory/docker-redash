@@ -14,7 +14,7 @@ services:
       REDASH_HOST: http://127.0.0.1:5000
       REDASH_LOG_LEVEL: INFO
       REDASH_REDIS_URL: redis://redis:6379/0
-      REDASH_DATABASE_URL: postgresql://postgres@postgres/postgres
+      REDASH_DATABASE_URL: postgresql://postgres:postgres@postgres/postgres
       REDASH_COOKIE_SECRET: veryverysecret
       REDASH_WEB_WORKERS: 4
   worker:
@@ -25,7 +25,7 @@ services:
       PYTHONUNBUFFERED: 0
       REDASH_LOG_LEVEL: INFO
       REDASH_REDIS_URL: redis://redis:6379/0
-      REDASH_DATABASE_URL: postgresql://postgres@postgres/postgres
+      REDASH_DATABASE_URL: postgresql://postgres:postgres@postgres/postgres
       QUEUES: queries,scheduled_queries,celery
       WORKERS_COUNT: 2
   redis:
@@ -34,5 +34,8 @@ services:
   postgres:
     image: postgres:alpine
     restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     volumes:
       - ./data/postgres/data:/var/lib/postgresql/data
