@@ -12,6 +12,13 @@ docker-compose run --rm server create_db
 docker-compose up
 ```
 
+
+```
+# 如果失败，请先替换docker-compose.yml
+原始 build: .
+替换 image: registry.cn-hangzhou.aliyuncs.com/wangdong/redash
+```
+
 ## 筛选
 
 |字段|说明|
